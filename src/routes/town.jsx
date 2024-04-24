@@ -1,9 +1,11 @@
-import "./App.css";
-import { useState } from "react";
-import Bar from "./components/Bar";
-import ColorSlider from "./components/ColorSlider";
 
-function App() {
+// import { useRouteError, useNavigate } from "react-router-dom";
+
+import { useState } from "react";
+import Bar from "../components/Bar";
+import ColorSlider from "../components/ColorSlider";
+
+export default function Town() {
   const [color, setColor] = useState(Math.floor(Math.random() * (210 - 160 + 1)) + 160);
 
   const handleSliderChange = (event) => {
@@ -55,5 +57,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
