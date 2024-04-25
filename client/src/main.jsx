@@ -9,7 +9,7 @@ import {
 import Root from "./routes/root";
 
 import "./index.css";
-import Town from "./routes/town";
+import Town from "./routes/createTown";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         },
     {
       element: <Town/>,
-      path: "/town",
+      path: "/create-town",
     },
       ]}]
   }

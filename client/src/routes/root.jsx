@@ -8,7 +8,7 @@ export default function Root() {
     <nav className="navbar">
       <div className="nav-section navigation">
           <div className="nav-link"><NavLink className="navlink" to="/overview">Overview</NavLink></div>
-          <div className="nav-link"><NavLink className="navlink" to="/town">Create artwork</NavLink></div>
+          <div className="nav-link"><NavLink className="navlink" to="/create-town">Create artwork</NavLink></div>
       </div>
       <div className="nav-section profile">
           <div className="nav-link"><NavLink className="navlink" to="/overview">Login</NavLink></div>
@@ -19,7 +19,7 @@ export default function Root() {
     <div className="outlet">
         <Outlet/>
     </div>
-    
+
   </div>
   );
 }
