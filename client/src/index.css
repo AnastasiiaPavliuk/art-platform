@@ -110,8 +110,7 @@ button {
   font-weight: 200;
   color: white;
   text-transform: capitalize;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.584);
-  padding: 0 .7rem;
+    padding: 0 .7rem;
 }
 
 
@@ -152,14 +151,29 @@ button {
   color: white;
   font-size: 1.5rem;
   cursor: pointer;
-  transition: all .3s;
   margin: .2rem;
+}
+
+.button-centered {
+  /* background-color: transparent; */
+  border: 3px solid white;
+  border-radius: 50%;
+  padding: .2rem;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: rgba(255, 255, 255, 0.142); */
 }
 
 button:disabled {
   color: gray;
   border-color: gray;
-  cursor: default
+  cursor: default;
 }
 
 .city-cont {
@@ -179,6 +193,7 @@ button:disabled {
   background-image: radial-gradient(rgba(203, 195, 239, 0.256) 5%, rgba(203, 195, 239, 0.143) 30%, rgba(255, 255, 255, 0) 70%);
 
 }
+
 .controller-cont {
   position: absolute;
   display: flex;
@@ -212,4 +227,74 @@ button:disabled {
 .icon-img {
   height: 20px;
   padding: 5px;
+}
+
+.artworks-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 20px;
+}
+
+.artwork-card {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid rgb(131, 89, 223);
+  padding: 10px;
+  /* transition: all 3s ease-in-out; */
+}
+
+.artwork-img {
+  width: 100%;
+  height: 200px;
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+}
+
+.artwork-author {
+  color: rgb(203, 193, 225);
+  font-weight: 500;
+  margin: 10px 0;
+}
+
+.button-icon {
+  width: 50%;
+  filter: invert(100%);
+  margin: auto;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 10px 20px;
+  border-bottom: 2px solid rgba(230, 85, 249, 0.859);
+  margin-bottom: 2rem;
+}
+
+.nav-section {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+  color: rgba(255, 255, 255, 0.487);
 }
