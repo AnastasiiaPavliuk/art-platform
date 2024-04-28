@@ -14,6 +14,7 @@ export default function Root() {
           <div className="nav-link"><NavLink className="navlink" to="/overview">Login</NavLink></div>
           <div className="nav-link"><NavLink className="navlink" to="/overview">Register</NavLink></div>
       </div>
+      
     </nav>
 
     <div className="outlet">
