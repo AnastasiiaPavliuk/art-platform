@@ -1,0 +1,25 @@
+.formGroup {
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+  margin: auto;
+  width: 50%;
+}
+
+.formGroup label {
+  color: #808080;
+}
+
+.submit {
+  padding-inline: 32px;
+  padding-block: 12px;
+  border-radius: 4px;
+  box-shadow: none;
+  color: #000000;
+}
+
+.error {
+  color: #ff0000;
+  font-size: 16px;
+}

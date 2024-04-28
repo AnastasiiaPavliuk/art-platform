@@ -1,4 +1,3 @@
-export default function Overview() {
 
 const artworks = [
   {"id": 1, "artist": "John Smith"},
@@ -14,6 +13,7 @@ const artworks = [
   {"id": 11, "artist": "Brian Anderson"}
 ];
 
+const Overview = () => {
 return (
     <div className="overview-container">
       <h1>Overview</h1>
@@ -25,9 +25,12 @@ return (
           </div>
         ))}
       </div>
-     <a href="/town"> <div className="button-centered">
+     <a href="/create-town"> <div className="button-centered">
       <img className="button-icon" src="../public/icon-plus.svg" alt="icon" />
      </div></a>
     </div>
   );
-}
+};
+
+export default Overview;
+

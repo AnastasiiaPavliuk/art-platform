@@ -1,0 +1,15 @@
+
+
+.header {
+  margin-bottom: 1rem;
+}
+
+/* .shake {
+  animation: var(--animation-shake-x) forwards;
+  animation-duration: 0.5s;
+} */
+
+.register {
+  margin-top: 3rem;
+  text-align: right;
+}

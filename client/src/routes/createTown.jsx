@@ -1,59 +1,77 @@
+import { Form, redirect } from "react-router-dom";
+import formStyles from "../styles/forms.module.css";
+// import { createCheese } from "../services/cheese";
+import { getAuthData } from "../services/auth";
 
-// import { useRouteError, useNavigate } from "react-router-dom";
+const loader = async ({ request }) => {
+  const { user } = getAuthData();
+  if (!user) {
+    let params = new URLSearchParams();
+    params.set("from", new URL(request.url).pathname);
+    return redirect("/auth/login?" + params.toString());
+  }
+  return null;
+};
 
-import { useState } from "react";
-import Bar from "../components/Bar";
-import ColorSlider from "../components/ColorSlider";
+const action = async ({ request }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  console.log("formdata", data);
+  await createCheese(data);
+  return redirect(`/`);
+};
 
-export default function Town() {
-  const [color, setColor] = useState(Math.floor(Math.random() * (210 - 160 + 1)) + 160);
-
-  const handleSliderChange = (event) => {
-    setColor(parseInt(event.target.value));
-  };
-
-  const [buildings, setBuildings] = useState([
-    { id: 1, height: Math.floor(Math.random() * 120) + 60, windows: Math.random() > 0.5 ? false : true },
-    { id: 2, height: Math.floor(Math.random() * 120) + 60, windows: Math.random() > 0.5 ? false : true },
-    { id: 3, height: Math.floor(Math.random() * 120) + 60, windows: Math.random() > 0.5 ? false : true },
-    { id: 4, height: Math.floor(Math.random() * 120) + 60, windows: Math.random() > 0.5 ? false : true }
-  ]);
-
-  const addBuilding = () => {
-    const lastId = buildings.length > 0 ? buildings[buildings.length - 1].id : 0;
-    const newBuilding = {
-      id: lastId + 1,
-      height: Math.floor(Math.random() * 120) + 60,
-      windows: Math.random() > 0.5 ? false : true
-    };
-    setBuildings([...buildings, newBuilding]);
-  };
-
-  const deleteBuilding = (barId) => {
-    setBuildings(buildings.filter(building => building.id !== barId));
-  };
-
+const CreateCheese = () => {
   return (
-    <div className="app">
-      <h1 className="heading">Generate your town!</h1>
-      <ColorSlider color={color} handleSliderChange={handleSliderChange}/>
-      <div className="flex-row">
-        <div className="city-cont" style={{ gap: '2px', borderColor: `hsl(${color}, 100%, 50%)` }}>
-        <div className="arrow"><img className="arrow-img" src="./click-on-arrow.png" alt="click on a building" /></div>
-          {buildings.map((building) => (
-            <Bar
-              key={building.id}
-              barId_key={building.id}
-              width={70}
-              height={building.height}
-              color={`hsl(${color}, 70%, 50%)`}
-              windows={building.windows}
-              onDelete={() => deleteBuilding(building.id)}
-            />
-          ))}
-        </div>
-        <button onClick={addBuilding}>+</button>
+    <Form method="POST">
+      <div className={formStyles.formGroup}>
+        <label htmlFor="name">Name</label>
+        <input type="text" id="name" name="name" defaultValue="test cheese" />
       </div>
-    </div>
+
+      <div className={formStyles.formGroup}>
+        <label htmlFor="description">Description</label>
+        <textarea
+          name="description"
+          id="description"
+          cols="30"
+          rows="5"
+          defaultValue="great"
+        ></textarea>
+      </div>
+
+      <div className={formStyles.formGroup}>
+        <label htmlFor="type">Type</label>
+        <select name="type" id="type">
+          <option value="fresh cheese">fresh cheese</option>
+          <option value="soft cheese">soft cheese</option>
+          <option value="semi-hard cheese">semi-hard cheese</option>
+          <option value="hard cheese">hard cheese</option>
+        </select>
+      </div>
+
+      <div className={formStyles.formGroup}>
+        <label htmlFor="image">Image</label>
+        <input
+          type="url"
+          id="image"
+          name="image"
+          defaultValue="https://www.lekkervanbijons.be/sites/default/files/styles/400w/public/images/cobergher_light.jpg"
+        />
+      </div>
+
+      <div className={formStyles.formGroup}>
+        <input
+          type="submit"
+          className={formStyles.submit}
+          value="Add this piece of cheese"
+        />
+      </div>
+    </Form>
   );
-}
+};
+
+CreateCheese.action = action;
+CreateCheese.loader = loader;
+
+export default CreateCheese;
