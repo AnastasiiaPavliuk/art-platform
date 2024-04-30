@@ -1,26 +1,23 @@
-// import { NavLink, Outlet, redirect, Form, useLoaderData } from "react-router-dom";
-import { NavLink, Outlet } from "react-router-dom";
-import '../index.css';
-export default function Root() {
+import { Outlet } from "react-router-dom";
+import Hero from "../components/Hero";
+import { getAuthData } from "../services/auth";
+
+const loader = async () => {
+  const data = getAuthData();
+  return data;
+};
+
+const Root = () => {
   return (
-  <div>
-
-    <nav className="navbar">
-      <div className="nav-section navigation">
-          <div className="nav-link"><NavLink className="navlink" to="/overview">Overview</NavLink></div>
-          <div className="nav-link"><NavLink className="navlink" to="/create-town">Create artwork</NavLink></div>
-      </div>
-      <div className="nav-section profile">
-          <div className="nav-link"><NavLink className="navlink" to="/overview">Login</NavLink></div>
-          <div className="nav-link"><NavLink className="navlink" to="/overview">Register</NavLink></div>
-      </div>
-      
-    </nav>
-
-    <div className="outlet">
-        <Outlet/>
-    </div>
-
-  </div>
+    <>
+      <Hero />
+      <main>
+        <Outlet />
+      </main>
+    </>
   );
-}
+};
+
+Root.loader = loader;
+
+export default Root;
