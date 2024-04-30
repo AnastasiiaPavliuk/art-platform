@@ -13,7 +13,7 @@ import CreateTownPage from "./routes/createTownPage";
 import LoginPage from "./routes/auth/loginPage";
 import RegisterPage from "./routes/auth/registerPage";
 
-import "./index.css";
+import "./styles/index.css";
 
 const router = createBrowserRouter([
   {

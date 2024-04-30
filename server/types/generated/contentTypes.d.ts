@@ -367,17 +367,21 @@ export interface ApiArtworkArtwork extends Schema.CollectionType {
   info: {
     singularName: 'artwork';
     pluralName: 'artworks';
-    displayName: 'artwork';
+    displayName: 'Artwork';
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    style: Attribute.JSON;
+    artworkData: Attribute.JSON;
+    owner: Attribute.Relation<
+      'api::artwork.artwork',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::artwork.artwork',
       'oneToOne',
@@ -806,6 +810,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     website_url: Attribute.String;
     twitter_username: Attribute.String & Attribute.Unique;
     profile_slug: Attribute.UID<'plugin::users-permissions.user', 'username'>;
+    artworks: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::artwork.artwork'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

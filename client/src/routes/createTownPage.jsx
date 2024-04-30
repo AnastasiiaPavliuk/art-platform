@@ -1,14 +1,15 @@
-import { Form, redirect, useLoaderData } from "react-router-dom";
+import { Form, redirect } from "react-router-dom";
+import formStyles from "../styles/forms.module.css";
 import { useState } from "react";
-import Bar from "../components/Bar";
-import ColorSlider from "../components/ColorSlider";
+// import Bar from "../components/Bar";
+// import ColorSlider from "../components/ColorSlider";
+import RenderApp from "../components/RenderApp";
 
 import { createTown } from "../services/artwork";
 import { getAuthData } from "../services/auth";
 // import TownCard from "../components/TownCard";
 
 //take the last last file
-
 
 const loader = async ({ request }) => {
   const { user } = getAuthData();
@@ -23,79 +24,104 @@ const loader = async ({ request }) => {
 const action = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log("formdata", data);
-  await createTown(data);
-  return redirect(`/`);
+
+  // const artworkData = JSON.parse(data.artwork);
+  const artworkData = JSON.parse(data.artwork);
+
+  const payload = {
+    artworkData: artworkData,
+  };
+
+  // console.log("artworkData", artworkData);
+
+  await createTown(payload);
+  return null;
 };
 
 export default function CreateTownPage() {
-
-  const [style, setStyle] = useState({
-   color: Math.floor(Math.random() * (210 - 160 + 1)) + 160,
-    buildingAmount: 4,
-  });
-
-  const handleStyleChange = (variable, value) => {
-    setStyle({ ...style, [variable]: value });
-  };
-
-  const [color, setColor] = useState({
-    color: Math.floor(Math.random() * (210 - 160 + 1)) + 160,
-  });
+  const [color, setColor] = useState(
+    Math.floor(Math.random() * (210 - 160 + 1)) + 160
+  );
 
   const handleSliderChange = (event) => {
     setColor(parseInt(event.target.value));
   };
 
   const [buildings, setBuildings] = useState([
-    { id: 1, height: Math.floor(Math.random() * 120) + 60, windows: Math.random() > 0.5 ? false : true },
-    { id: 2, height: Math.floor(Math.random() * 120) + 60, windows: Math.random() > 0.5 ? false : true },
-    { id: 3, height: Math.floor(Math.random() * 120) + 60, windows: Math.random() > 0.5 ? false : true },
-    { id: 4, height: Math.floor(Math.random() * 120) + 60, windows: Math.random() > 0.5 ? false : true }
+    {
+      id: 1,
+      height: Math.floor(Math.random() * 120) + 60,
+      windows: Math.random() > 0.5 ? false : true,
+    },
+    {
+      id: 2,
+      height: Math.floor(Math.random() * 120) + 60,
+      windows: Math.random() > 0.5 ? false : true,
+    },
+    {
+      id: 3,
+      height: Math.floor(Math.random() * 120) + 60,
+      windows: Math.random() > 0.5 ? false : true,
+    },
+    {
+      id: 4,
+      height: Math.floor(Math.random() * 120) + 60,
+      windows: Math.random() > 0.5 ? false : true,
+    },
   ]);
 
   const addBuilding = () => {
-    const lastId = buildings.length > 0 ? buildings[buildings.length - 1].id : 0;
+    const lastId =
+      buildings.length > 0 ? buildings[buildings.length - 1].id : 0;
     const newBuilding = {
       id: lastId + 1,
       height: Math.floor(Math.random() * 120) + 60,
-      windows: Math.random() > 0.5 ? false : true
+      windows: Math.random() > 0.5 ? false : true,
     };
     setBuildings([...buildings, newBuilding]);
   };
 
   const deleteBuilding = (barId) => {
-    setBuildings(buildings.filter(building => building.id !== barId));
+    setBuildings(buildings.filter((building) => building.id !== barId));
   };
 
-  const { artworks } = useLoaderData();
+  const artworkData = {
+    color: color,
+    buildings: buildings,
+  };
+
+  const serializedData = JSON.stringify(artworkData);
 
   return (
-    <div className="app">
-      <h1 className="heading">Generate your town!</h1>
-      <ColorSlider style={style} onStyleChange={handleStyleChange}  handleSliderChange={handleSliderChange}/>
-      <div className="flex-row">
-        <div className="city-cont" style={{ gap: '2px', borderColor: `hsl(${color}, 100%, 50%)` }}>
-        <div className="arrow"><img className="arrow-img" src="./click-on-arrow.png" alt="click on a building" /></div>
-          {buildings.map((building) => (
-            <Bar
-              key={building.id}
-              barId_key={building.id}
-              width={70}
-              height={building.height}
-              color={`hsl(${color}, 70%, 50%)`}
-              windows={building.windows}
-              onDelete={() => deleteBuilding(building.id)}
-            />
-          ))}
-        </div>
-        <Form method="POST">
-           <input type="hidden" name="drawing" value={JSON.stringify(style)} readOnly={true} />
-           <button className='saveArtworkButton' type='submit'>Save Artwork</button>
-        </Form>
-        <button onClick={addBuilding}>+</button>
+    <Form method="POST">
+      <div className={formStyles.formGroup}>
+        <RenderApp
+          color={color}
+          handleSliderChange={handleSliderChange}
+          buildings={buildings}
+          addBuilding={addBuilding}
+          deleteBuilding={deleteBuilding}
+        />
+        {/* <label htmlFor="color">Color</label> */}
+        {/* <ColorSlider color={color} handleSliderChange={handleSliderChange} /> */}
       </div>
-    </div>
+      {/* <input type="hidden" name="color" value={color} readOnly={true} /> */}
+      {/* <input
+        type="hidden"
+        name="buildings"
+        value={JSON.stringify(buildings)}
+        readOnly={true}
+      /> */}
+
+      <input type="hidden" name="artwork" value={serializedData} />
+      <div className={formStyles.formGroup}>
+        <input
+          type="submit"
+          className={formStyles.submit}
+          value="Save Artwork"
+        />
+      </div>
+    </Form>
   );
 }
 

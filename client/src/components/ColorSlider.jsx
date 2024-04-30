@@ -6,8 +6,10 @@ const ColorSlider = ({ color, handleSliderChange }) => {
   return (
     <div className="flex-row">
       <label>Color Range</label>
-      <input className="color-slider"
+      <input htmlFor="slider" className="color-slider"
         type="range"
+        id="slider"
+        name="slider"
         min="160"
         max="210"
         value={color}
@@ -17,7 +19,6 @@ const ColorSlider = ({ color, handleSliderChange }) => {
     </div>
   );
 };
-
 
 ColorSlider.propTypes = {
   color: PropTypes.number.isRequired,

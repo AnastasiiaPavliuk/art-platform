@@ -8,22 +8,27 @@ const getTowns = async () => {
   return towns.data.map(unwrapAtributes);
 };
 
+const getTown = async (id) => {
+  const town = await fetchApi({ endpoint: `artworks/${id}`, wrappedByKey: "data" });
+  return unwrapAtributes(town);
+};
 
-//update town 
+//update town
 
 const createTown = async (data) => {
   const town = await fetchApi(
-  { endpoint: "artworks" },
-  {
-    method: "POST",
+    { endpoint: "artworks" },
+    {
+      method: "POST",
       body: JSON.stringify({ data }),
-        headers: {
-      "Content-Type": "application/json",
+      headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${getToken()}`,
       },
-  }
+    }
   );
-return unwrapAtributes(town);
+  // console.log("artwork.js", data);
+  return unwrapAtributes(town);
 };
 
-export { getTowns, createTown };
+export { getTown, getTowns, createTown };

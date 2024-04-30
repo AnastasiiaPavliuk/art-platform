@@ -4,16 +4,22 @@
   "info": {
     "singularName": "artwork",
     "pluralName": "artworks",
-    "displayName": "artwork",
+    "displayName": "Artwork",
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "style": {
+    "artworkData": {
       "type": "json"
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "artworks"
     }
   }
 }
