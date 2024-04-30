@@ -6,8 +6,7 @@ import {
   useLocation,
   useNavigation,
 } from "react-router-dom";
-import formstyles from "../../styles/forms.module.css";
-import style from "./login.module.css";
+
 import { authenticate, getAuthData } from "../../services/auth";
 import ErrorField from "../../components/ErrorField";
 
@@ -47,7 +46,7 @@ const action = async ({ request }) => {
   return redirect(redirectTo || "/");
 };
 
-const Login = () => {
+export default function LoginPage() {
   let location = useLocation();
   let params = new URLSearchParams(location.search);
   let from = params.get("from") || "/";
@@ -59,7 +58,7 @@ const Login = () => {
 
   return (
     <section>
-      <hgroup className={style.header}>
+      <hgroup >
         <h2>Sign in</h2>
         {from != "/" ? (
           <p>You must log in to view the page at {from}</p>
@@ -68,7 +67,7 @@ const Login = () => {
         )}
       </hgroup>
       <Form method="post">
-        <div className={formstyles.formGroup}>
+        <div >
           <input type="hidden" name="redirectTo" value={from} />
           <label htmlFor="email">Email</label>
           <input
@@ -81,7 +80,7 @@ const Login = () => {
           />
           <ErrorField data={actionData} field="email" />
         </div>
-        <div className={formstyles.formGroup}>
+        <div >
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -93,25 +92,24 @@ const Login = () => {
           />
           <ErrorField data={actionData} field="password" />
         </div>
-        <div className={formstyles.formGroup}>
+        <div>
           <ErrorField data={actionData} field="general" />
           <button
             type="submit"
             disabled={isLoggingIn}
-            className={actionData && actionData.error ? style.shake : null}
+            // className={actionData && actionData.error ? style.shake : null}
           >
             {isLoggingIn ? "Logging in..." : "Login"}
           </button>
-          <Link to="/auth/register" className={style.register}>
+          <Link to="/auth/register">
             ...or Sign up!
           </Link>
         </div>
       </Form>
     </section>
   );
-};
+}
 
-Login.action = action;
-Login.loader = loader;
+LoginPage.action = action;
+LoginPage.loader = loader;
 
-export default Login;

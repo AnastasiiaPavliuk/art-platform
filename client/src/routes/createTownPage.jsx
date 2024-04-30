@@ -5,7 +5,7 @@ import { useState } from "react";
 import Bar from "../components/Bar";
 import ColorSlider from "../components/ColorSlider";
 
-export default function Town() {
+export default function CreateTownPage() {
   const [color, setColor] = useState(Math.floor(Math.random() * (210 - 160 + 1)) + 160);
 
   const handleSliderChange = (event) => {

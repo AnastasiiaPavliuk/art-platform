@@ -1,4 +1,4 @@
-export default function Overview() {
+export default function OverviewPage() {
 
 const artworks = [
   {"id": 1, "artist": "John Smith"},

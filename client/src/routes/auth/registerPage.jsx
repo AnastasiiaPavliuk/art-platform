@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import ErrorField from "../../components/ErrorField";
 import { register } from "../../services/auth";
-import formstyles from "../../styles/forms.module.css";
 import style from "./login.module.css";
 
 const action = async ({ request }) => {
@@ -44,7 +43,7 @@ const action = async ({ request }) => {
   return redirect(redirectTo || "/");
 };
 
-const Register = () => {
+export default function RegisterPage(){
   let location = useLocation();
   let params = new URLSearchParams(location.search);
   let from = params.get("from") || "/";
@@ -111,8 +110,8 @@ const Register = () => {
       </Form>
     </section>
   );
-};
+}
 
-Register.action = action;
+RegisterPage.action = action;
+// RegisterPage.loader = loader;
 
-export default Register;

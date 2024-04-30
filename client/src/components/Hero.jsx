@@ -1,19 +1,15 @@
 import { Link } from "react-router-dom";
-import styles from "./Hero.module.css";
 import AuthStatus from "./AuthStatus";
 
-const Hero = () => {
+export default function Hero() {
   return (
-    <div className={`${styles.container}`}>
-      <div className={styles.wrapper}>
-        <Link to="/" className={styles.titel}>
-          <h1>Kaasbaas</h1>
-        </Link>
-
+    <div >
+      <nav className="navbar">
+        <Link to="/overview"> <h1>Overview</h1> </Link>
+        <Link to="/create-artwork" > <h1>Create artwork</h1> </Link>
         <AuthStatus />
-      </div>
+      </nav>
     </div>
   );
-};
+}
 
-export default Hero;

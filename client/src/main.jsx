@@ -7,7 +7,11 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import Town from "./routes/createTown";
+import Index from "./routes";
+import OverviewPage from "./routes/overviewPage";
+import CreateTownPage from "./routes/createTownPage";
+import LoginPage from "./routes/auth/loginPage";
+import RegisterPage from "./routes/auth/registerPage";
 
 import "./index.css";
 
@@ -28,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         element: <CreateTownPage/>,
-        path: "/create-town",
+        path: "/create-artwork",
         action: CreateTownPage.action,
         loader: CreateTownPage.loader,
       },
