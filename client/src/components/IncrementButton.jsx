@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
  import PropTypes from "prop-types";
 
 const IncrementButton = ({height}) => {
 
 
   return (
-      <button onClick={IncrementButton} >{height}</button>
-
+    <button type="button" onClick={IncrementButton}>
+      {height}
+    </button>
   );
 };
 

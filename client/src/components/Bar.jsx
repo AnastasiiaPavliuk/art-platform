@@ -7,12 +7,14 @@ const Bar = ({ barId_key, width, height, color, windows, onDelete }) => {
   const [heightUpd, setCurrentHeight] = useState(height);
   const barId = barId_key;
 
-  const incrementHeight = () => {
-    setCurrentHeight(prevHeight => prevHeight + 20);
+  const incrementHeight = (event) => {
+    setCurrentHeight((prevHeight) => prevHeight + 20);
+    event.preventDefault();
   };
 
-  const decrementHeight = () => {
+  const decrementHeight = (event) => {
     setCurrentHeight(prevHeight => prevHeight - 20);
+      event.preventDefault();
   };
 
   const toggleControllerVisibility = () => {

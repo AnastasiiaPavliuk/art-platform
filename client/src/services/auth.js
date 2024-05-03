@@ -1,4 +1,4 @@
-const AUTH_DATA = "auth-data-kaasbaas";
+const AUTH_DATA = "auth-data";
 
 export const authenticate = async (username, password) => {
   let response;
@@ -58,6 +58,10 @@ export const setAuthData = (authData) => {
   if (authData) {
     localStorage.setItem(AUTH_DATA, JSON.stringify(authData));
   }
+};
+
+export const removeAuthData = () => {
+  localStorage.removeItem(AUTH_DATA);
 };
 
 export const getAuthData = () => {

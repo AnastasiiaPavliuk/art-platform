@@ -1,31 +1,73 @@
 import PropTypes from 'prop-types';
+//import TownDetail from '../routes/townDetail';
+import TownSmallimage from '../components/TownSmallimage';
+import { FaHeart } from "react-icons/fa";
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const daySuffix = (day) => {
+    if (day > 3 && day < 21) return "th";
+    switch (day % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  };
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+
+  return `${day}${daySuffix(day)} of ${months[monthIndex]}, ${year}`;
+};
 
 
-
-
-export default function TownCard({artworkParameters}) {
+export default function TownCard({ town }) {
   return (
-    <div>
-      <p>{`Artwork data: ${artworkParameters}`}</p>
+    <>
+      <div
+        style={{ width: "100%", display: "flex", justifyContent: "center"}}
+      >
+      <div
+        style={{ transform: "scale(0.4)", transformOrigin: "center center" }}
+      >
+        <TownSmallimage town={town} />
+      </div>
+</div>
+      {/* The className "artworks-container" might be needed, ensure it's added if you use it for styling */}
+      <div className="flex-card">
+        <p>{formatDate(town.createdAt)}</p>
+        <div className="like">
+          <FaHeart />
+        </div>
+      </div>
 
-
-      {/* <p>{`Artwork ID: ${artwork.id}`}</p>
-      <p>{`Updated At: ${artwork.attributes.updatedAt}`}</p>
-      <p>{`Color Code: ${artwork.attributes.artworkData.color}`}</p>
-      <div>
-        <p>Buildings:</p>
-        {artwork.attributes.artworkData.buildings.map((building, index) => (
-          <p key={index}>
-            {`Building ID: ${building.id}, Height: ${
-              building.height
-            }, Windows: ${building.windows ? "Yes" : "No"}`}
-          </p>
-        ))}
-      </div> */}
-    </div>
+      <div className="flex-card">
+        <p className="artwork-author">{town.owner.data.attributes.username}</p>
+      </div>
+    </>
   );
 }
 
 TownCard.propTypes = {
-  artworkParameters: PropTypes.object.isRequired,
+  town: PropTypes.object.isRequired,
 };

@@ -8,8 +8,9 @@ const DecrementButton = ({height }) => {
   };
 
   return (
-<button onClick={handleDecrement} disabled={height <= 20}>-</button>
-
+    <button type="button"  onClick={handleDecrement} disabled={height <= 20}>
+      -
+    </button>
   );
 };
 

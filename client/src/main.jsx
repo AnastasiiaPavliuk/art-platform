@@ -2,14 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import ErrorPage from "./error-page";
 import Root from "./routes/root";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  redirect,
+} from "react-router-dom";
 
 import Index from "./routes";
 import OverviewPage from "./routes/overviewPage";
 import CreateTownPage from "./routes/createTownPage";
 import LoginPage from "./routes/auth/loginPage";
 import RegisterPage from "./routes/auth/registerPage";
-//import TownDetail from "./routes/auth/townDetail";
+import TownDetail from "./routes/townDetail";
+import { removeAuthData } from "./services/auth";
 
 import "./styles/index.css";
 
@@ -34,11 +39,11 @@ const router = createBrowserRouter([
         action: CreateTownPage.action,
         loader: CreateTownPage.loader,
       },
-      // {
-      //   element: <TownDetail />,
-      //   path: "/create-artwork/detail/:id",
-      //   loader: TownDetail.loader,
-      // },
+      {
+        element: <TownDetail />,
+        path: "/artwork/:id",
+        loader: TownDetail.loader,
+      },
       {
         element: <LoginPage />,
         path: "/auth/login",
@@ -50,6 +55,13 @@ const router = createBrowserRouter([
         path: "/auth/register",
         action: RegisterPage.action,
         loader: RegisterPage.loader,
+      },
+      {
+        path: "/auth/logout",
+        action: async () => {
+          removeAuthData();
+          return redirect("/");
+        },
       },
     ],
   },

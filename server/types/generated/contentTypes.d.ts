@@ -805,11 +805,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    about: Attribute.Blocks & Attribute.Required;
-    avatar_url: Attribute.String;
-    website_url: Attribute.String;
-    twitter_username: Attribute.String & Attribute.Unique;
-    profile_slug: Attribute.UID<'plugin::users-permissions.user', 'username'>;
     artworks: Attribute.Relation<
       'plugin::users-permissions.user',
       'oneToMany',

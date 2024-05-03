@@ -4,11 +4,18 @@ import Bar from "./Bar";
 import ColorSlider from "./ColorSlider";
 import propTypes from "prop-types";
 
-function RenderApp({ color, handleSliderChange, buildings, addBuilding, deleteBuilding}) {
+function RenderApp({
+  color,
+  handleSliderChange,
+  buildings,
+  addBuilding,
+  deleteBuilding,
+}) {
   return (
     <div className="app">
       <h1 className="heading">Generate your town!</h1>
       <ColorSlider color={color} handleSliderChange={handleSliderChange} />
+
       <div className="flex-row">
         <div
           className="city-cont"
@@ -33,7 +40,10 @@ function RenderApp({ color, handleSliderChange, buildings, addBuilding, deleteBu
             />
           ))}
         </div>
-        <button onClick={addBuilding}>+</button>
+
+        <button type="button" onClick={addBuilding}>
+          +
+        </button>
       </div>
     </div>
   );

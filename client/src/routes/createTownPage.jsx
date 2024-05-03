@@ -112,11 +112,9 @@ export default function CreateTownPage() {
       /> */}
 
       <input type="hidden" name="artwork" value={serializedData} />
-        <input
-          className="btn-save"
-          type="submit"
-          value="Save Artwork"
-        />
+      <div>
+        <input className="btn-save" type="submit" value="Save Artwork" />
+      </div>
     </Form>
   );
 }

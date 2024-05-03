@@ -7,11 +7,11 @@ import {
 } from "react-router-dom";
 import ErrorField from "../../components/ErrorField";
 import { register } from "../../services/auth";
-import style from "./login.module.css";
+//import style from "./login.module.css";
 
 const action = async ({ request }) => {
   const formData = await request.formData();
-  const { email, password, username } = Object.fromEntries(formData);
+  const { email, password, username} = Object.fromEntries(formData);
 
   if (!username) {
     return {
@@ -55,13 +55,13 @@ export default function RegisterPage(){
 
   return (
     <section>
-      <hgroup className={style.header}>
+      <hgroup>
         <h2>Sign up</h2>
         <p>Get access to all the features</p>
       </hgroup>
       <Form method="post">
         <input type="hidden" name="redirectTo" value={from} />
-        <div className={formstyles.formGroup}>
+        <div >
           <label htmlFor="email">Username</label>
           <input
             type="text"
@@ -69,11 +69,10 @@ export default function RegisterPage(){
             id="username"
             placeholder="username"
             autoComplete="username"
-            defaultValue="tester-0"
           />
           <ErrorField data={actionData} field="username" />
         </div>
-        <div className={formstyles.formGroup}>
+        <div >
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -85,7 +84,7 @@ export default function RegisterPage(){
           />
           <ErrorField data={actionData} field="email" />
         </div>
-        <div className={formstyles.formGroup}>
+        <div>
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -97,12 +96,12 @@ export default function RegisterPage(){
           />
           <ErrorField data={actionData} field="password" />
         </div>
-        <div className={formstyles.formGroup}>
+        <div >
           <ErrorField data={actionData} field="general" />
           <button
             type="submit"
             disabled={isLoggingIn}
-            className={actionData && actionData.error ? style.shake : null}
+
           >
             {isLoggingIn ? "Sending..." : "Sign up"}
           </button>
