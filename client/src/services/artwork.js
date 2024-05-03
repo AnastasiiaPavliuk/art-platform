@@ -2,22 +2,31 @@ import { getToken } from "./auth";
 import { fetchApi, unwrapAtributes } from "./strapi";
 
 const getTowns = async () => {
-  const towns = await fetchApi({ endpoint: "artworks" });
-  if (!towns || towns.data) return [];
-  console.log(towns.data);
-  return towns.data.map(unwrapAtributes);
+  const response = await fetchApi({
+    endpoint: "artworks",
+    query: { populate: ["owner"] }, // Make sure to populate owner data
+  });
+  if (!response || !response.data) return [];
+  console.log("Artworks fetched:", response.data);
+  return response.data.map(unwrapAtributes);
 };
 
 const getTown = async (id) => {
-  const town = await fetchApi({ endpoint: `artworks/${id}`, wrappedByKey: "data" });
-  return unwrapAtributes(town);
+  const artwork = await fetchApi({
+    endpoint: `artworks/${id}`,
+    query: { populate: ["owner"] },
+    wrappedByKey: "data",
+  });
+  return unwrapAtributes(artwork);
 };
 
 //update town
 
 const createTown = async (data) => {
-  const town = await fetchApi(
-    { endpoint: "artworks" },
+  const response = await fetchApi(
+    {
+      endpoint: "artworks",
+    },
     {
       method: "POST",
       body: JSON.stringify({ data }),
@@ -27,8 +36,7 @@ const createTown = async (data) => {
       },
     }
   );
-  // console.log("artwork.js", data);
-  return unwrapAtributes(town);
+  return response;
 };
 
 export { getTown, getTowns, createTown };

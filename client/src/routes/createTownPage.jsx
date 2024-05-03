@@ -32,8 +32,6 @@ const action = async ({ request }) => {
     artworkData: artworkData,
   };
 
-  // console.log("artworkData", artworkData);
-
   await createTown(payload);
   return null;
 };
@@ -114,13 +112,11 @@ export default function CreateTownPage() {
       /> */}
 
       <input type="hidden" name="artwork" value={serializedData} />
-      <div className={formStyles.formGroup}>
         <input
+          className="btn-save"
           type="submit"
-          className={formStyles.submit}
           value="Save Artwork"
         />
-      </div>
     </Form>
   );
 }

@@ -1,16 +1,31 @@
-const import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 
 
-export default function TownCard({ town }) {
+
+export default function TownCard({artworkParameters}) {
   return (
     <div>
-      <p>{town.color}</p>
-       <p>{town.building}</p>
+      <p>{`Artwork data: ${artworkParameters}`}</p>
+
+
+      {/* <p>{`Artwork ID: ${artwork.id}`}</p>
+      <p>{`Updated At: ${artwork.attributes.updatedAt}`}</p>
+      <p>{`Color Code: ${artwork.attributes.artworkData.color}`}</p>
+      <div>
+        <p>Buildings:</p>
+        {artwork.attributes.artworkData.buildings.map((building, index) => (
+          <p key={index}>
+            {`Building ID: ${building.id}, Height: ${
+              building.height
+            }, Windows: ${building.windows ? "Yes" : "No"}`}
+          </p>
+        ))}
+      </div> */}
     </div>
   );
 }
 
 TownCard.propTypes = {
-  town: PropTypes.object.isRequired,
+  artworkParameters: PropTypes.object.isRequired,
 };
