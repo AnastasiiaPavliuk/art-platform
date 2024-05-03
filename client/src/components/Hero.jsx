@@ -5,8 +5,8 @@ export default function Hero() {
   return (
     <div >
       <nav className="navbar">
-        <Link to="/overview"> <h1>Overview</h1> </Link>
-        <Link to="/create-artwork" > <h1>Create artwork</h1> </Link>
+        <Link to="/overview"> <div className="nav-link">Overview</div> </Link>
+        <Link to="/create-artwork" > <div className="nav-link">Create Town</div> </Link>
         <AuthStatus />
       </nav>
     </div>

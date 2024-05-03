@@ -1,8 +1,6 @@
+import { useLoaderData, } from "react-router-dom";
 import { getTown } from "../services/artwork";
-//import ColorSlider from "./components/ColorSlider";
 import Bar from "../components/Bar";
-import { Link, useLoaderData, } from "react-router-dom";
-import { useState } from "react";
 
 const loader = async ({ params }) => {
   const id = params.id;
@@ -19,20 +17,15 @@ const loader = async ({ params }) => {
 
 export default function TownDetail() {
   const { town } = useLoaderData();
-  // Assuming user context or similar hook to get user data
-   //const { user } = useUserContext();
-
 
   const color = town.attributes.artworkData.color;
   const buildings = town.attributes.artworkData.buildings;
-  //const townId = town.id;
-//const ownerUsername = town.owner.data.attributes.username;
-
   return (
     <>
-      <div className="city-cont">
-        {/* <ColorSlider color={color} /> */}
-        <p>{`Color Code: ${color}`}</p>
+      <div
+        className="city-cont"
+        style={{ borderColor: `hsl(${color}, 100%, 50%)` }}
+      >
         {buildings.map((building) => (
           <Bar
             key={building.id}

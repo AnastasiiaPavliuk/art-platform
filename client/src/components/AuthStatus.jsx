@@ -3,13 +3,13 @@ import { Link, useFetcher, useRouteLoaderData } from "react-router-dom";
 export default function AuthStatus() {
   const fetcher = useFetcher();
   let { user } = useRouteLoaderData("root");
-  let isLoggingOut = fetcher.formData != null;
+   let isLoggingOut = fetcher.formData != null;
 
   return user ? (
     <>
-      <p>Welcome, {user.username}</p>
+      <p style={{ color: "grey" }}>Welcome, {user.username}</p>
       <fetcher.Form method="post" action="/auth/logout">
-        <button type="submit" disabled={isLoggingOut}>
+        <button className="nav-link" type="submit" disabled={isLoggingOut}>
           {isLoggingOut ? "Signing out..." : "Sign out"}
         </button>
       </fetcher.Form>

@@ -4,13 +4,8 @@ import Bar from "./Bar";
 import ColorSlider from "./ColorSlider";
 import propTypes from "prop-types";
 
-function RenderApp({
-  color,
-  handleSliderChange,
-  buildings,
-  addBuilding,
-  deleteBuilding,
-}) {
+ export default function CreateTown ( {color, handleSliderChange, buildings, addBuilding, deleteBuilding}) {
+
   return (
     <div className="app">
       <h1 className="heading">Generate your town!</h1>
@@ -49,7 +44,7 @@ function RenderApp({
   );
 }
 
-RenderApp.propTypes = {
+CreateTown.propTypes = {
   color: propTypes.number.isRequired,
   handleSliderChange: propTypes.func.isRequired,
   buildings: propTypes.array.isRequired,
@@ -57,4 +52,3 @@ RenderApp.propTypes = {
   deleteBuilding: propTypes.func.isRequired,
 };
 
-export default RenderApp;
