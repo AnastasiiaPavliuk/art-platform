@@ -1,7 +1,11 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-export default function  RenderActionButtons ({ loggedInUsername, ownerUsername, artworkId }) {
+export default function RenderActionButtons({
+  loggedInUsername,
+  ownerUsername,
+  artworkId,
+}) {
   if (loggedInUsername === ownerUsername) {
     return (
       <div>
@@ -10,9 +14,6 @@ export default function  RenderActionButtons ({ loggedInUsername, ownerUsername,
             Edit
           </button>
         </Link>
-        <button style={{ fontSize: "16px", padding: "0.5rem 1.5rem" }}>
-          Delete
-        </button>
       </div>
     );
   }

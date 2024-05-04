@@ -20,76 +20,61 @@ const getTown = async (id) => {
   return unwrapAtributes(artwork);
 };
 
-// add edit town
-
-// const updateTown = async (id, data) => {
-//   console.log("Preparing to update town with ID:", id);
-//   console.log("Data to be sent for update:", data);
-
-//   try {
-//     const response = await fetchApi(
-//       {
-//         endpoint: `artworks/${id}`,
-//       },
-//       {
-//         method: "PUT",
-//         body: JSON.stringify({ data }),
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${getToken()}`,
-//         },
-//       }
-//     );
-
-//     console.log("Response received:", response);
-
-//     if (!response.ok) {
-//       console.error("Failed to update artwork, response status:", response.status);
-//       throw new Error(`HTTP error! status: ${response.status}`);
-//     }
-
-//     const updatedArtwork = await response.json();
-//     console.log("Update response received:", updatedArtwork);
-
-//     const unwrappedData = unwrapAtributes(updatedArtwork);
-//     console.log("Unwrapped artwork data:", unwrappedData);
-
-//     return unwrappedData;
-//   } catch (error) {
-//     console.error("Error updating artwork:", error);
-//     throw error;  // Rethrowing the error after logging it for further handling if necessary
-//   }
-// };
+// date of update updates, but not the artworkdata
 
 
 const updateTown = async (id, data) => {
   console.log("Preparing to update town with ID:", id);
-  console.log("Data to be sent for update:", data);
+  console.log("Data to be sent for update:",data ); //correct
+
+  // const transformedResponse = {
+  //   data: {
+  //     attributes: {
+  //       artworkData: {
+  //         buildings: data.buildings,
+  //         color: data.color
+  //       },
+  //       id:id
+  //     }
+  //   },
+  //   meta: {}
+  // };
+
   const artwork = await fetchApi(
     {
       endpoint: `artworks/${id}`,
     },
     {
       method: "PUT",
-      body: JSON.stringify({ data }),
+      body: JSON.stringify({data}),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${getToken()}`,
       },
     }
   );
-  // if (!artwork.ok) {
-  //   console.error("Failed to update artwork, response status:",` ${ artwork}`);
-  //   throw new Error(`HTTP error! status: ${artwork.status}`);
-  // }
 
-  // const updatedArtwork = await artwork.json();
-  // console.log("Update response received:", updatedArtwork);
-
-  // const unwrappedData = unwrapAtributes(updatedArtwork);
-  // console.log("Unwrapped artwork data:", unwrappedData);
+  const updatedArtwork = await artwork;
+  const unwrappedData = unwrapAtributes(updatedArtwork); //not updated
+  console.log("Unwrapped artwork data:", unwrappedData);
 
   return unwrapAtributes(artwork);
+};
+
+const deleteTown = async (id) => {
+  const response = await fetchApi(
+    {
+      endpoint: `artworks/${id}`,
+    },
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    }
+  );
+
+  return response;
 };
 
 const createTown = async (data) => {
@@ -107,7 +92,8 @@ const createTown = async (data) => {
     }
   );
   console.log("Response received:", response);
+
   return response;
 };
 
-export { getTown, getTowns, createTown, updateTown };
+export { getTown, getTowns, createTown, updateTown, deleteTown };

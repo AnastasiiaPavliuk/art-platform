@@ -1,6 +1,7 @@
-import { useLoaderData, } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { getTown } from "../services/artwork";
 import BarSaved from "../components/BarSaved";
+import { deleteTown } from "../services/artwork";
 
 const loader = async ({ params }) => {
   const id = params.id;
@@ -13,13 +14,18 @@ const loader = async ({ params }) => {
   }
 };
 
-
-
 export default function TownDetail() {
   const { town } = useLoaderData();
+  const navigate = useNavigate();
 
   const color = town.attributes.artworkData.color;
   const buildings = town.attributes.artworkData.buildings;
+
+  const handleDelete = async () => {
+    await deleteTown(town.id);
+    navigate("/");
+  };
+
   return (
     <>
       <div
@@ -36,6 +42,12 @@ export default function TownDetail() {
           />
         ))}
       </div>
+      <button
+        style={{ fontSize: "16px", padding: "0.5rem 1.5rem" }}
+        onClick={handleDelete}
+      >
+        Delete
+      </button>
     </>
   );
 }

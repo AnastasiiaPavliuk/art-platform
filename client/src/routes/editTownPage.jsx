@@ -16,25 +16,23 @@ const loader = async ({ request, params }) => {
   if (user.id !== artworkData.owner.data.id) {
     return redirect(`/artwork/${params.id}`);
   }
-   //console.log("Artwork fetched:", artworkData);
+  //console.log("Artwork fetched:", artworkData);
   return { artworkData };
 };
 
 const action = async ({ request, params }) => {
   const formData = await request.formData();
-  const data = Object.fromEntries(formData);
+  const artworkData = Object.fromEntries(formData);
   const updatedArtwork = {
-    color: parseInt(data.color, 10),
-    buildings: JSON.parse(data.buildings),
+    color: parseInt(artworkData.color, 10),
+    buildings: JSON.parse(artworkData.buildings),
   };
   console.log("Updated Artwork to send:", updatedArtwork);
   await updateTown(params.id, updatedArtwork);
-  return redirect(`/artwork/${params.id}`);
+  return redirect(`/overview`);
 };
 
-
 export default function EditTownPage() {
-
   const { artworkData } = useLoaderData();
   const [color, setColor] = useState(artworkData.artworkData.color);
   const [buildings, setBuildings] = useState(artworkData.artworkData.buildings);
