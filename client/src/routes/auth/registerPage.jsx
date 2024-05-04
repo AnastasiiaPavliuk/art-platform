@@ -54,15 +54,15 @@ export default function RegisterPage(){
   let actionData = useActionData();
 
   return (
-    <section>
-      <hgroup>
-        <h2>Sign up</h2>
+    <section className="signup-section">
+      <hgroup className="signup-header">
+        <h2>Register</h2>
         <p>Get access to all the features</p>
       </hgroup>
-      <Form method="post">
+      <Form method="post" className="signup-form">
         <input type="hidden" name="redirectTo" value={from} />
-        <div >
-          <label htmlFor="email">Username</label>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             name="username"
@@ -72,7 +72,7 @@ export default function RegisterPage(){
           />
           <ErrorField data={actionData} field="username" />
         </div>
-        <div >
+        <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -84,7 +84,7 @@ export default function RegisterPage(){
           />
           <ErrorField data={actionData} field="email" />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -96,14 +96,10 @@ export default function RegisterPage(){
           />
           <ErrorField data={actionData} field="password" />
         </div>
-        <div >
+        <div className="form-actions">
           <ErrorField data={actionData} field="general" />
-          <button
-            type="submit"
-            disabled={isLoggingIn}
-
-          >
-            {isLoggingIn ? "Sending..." : "Sign up"}
+          <button type="submit" disabled={isLoggingIn}>
+            {isLoggingIn ? "Sending..." : "Register"}
           </button>
         </div>
       </Form>

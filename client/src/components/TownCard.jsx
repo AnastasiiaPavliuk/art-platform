@@ -1,7 +1,12 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 //import TownDetail from '../routes/townDetail';
-import TownSmallimage from '../components/TownSmallimage';
-import { FaHeart } from "react-icons/fa";
+import TownSmallimage from "../components/TownSmallimage";
+// import { FaHeart } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import RenderActionButtons from "./RenderActionButtons";
+import { getAuthData } from "../services/auth";
+
+
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -40,29 +45,38 @@ const formatDate = (dateString) => {
   return `${day}${daySuffix(day)} of ${months[monthIndex]}, ${year}`;
 };
 
+// const loader = async () => {
+//    // Fetch the current logged-in user data
 
-export default function TownCard({ town }) {
+// };
+
+export default function TownCard({ town, artworkId}) {
+    const authData = getAuthData();
+    const loggedInUsername = authData && authData.user ? authData.user.username : "Not logged in";
+    const ownerUsername = town.owner.data.attributes.username;
   return (
     <>
-      <div
-        style={{ width: "100%", display: "flex", justifyContent: "center"}}
-      >
-      <div
-        style={{ transform: "scale(0.4)", transformOrigin: "center center" }}
-      >
-        <TownSmallimage town={town} />
+      <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <div
+          style={{ transform: "scale(0.4)", transformOrigin: "center center" }}
+        >
+          <Link to={`/artwork/${artworkId}`}>
+          <TownSmallimage town={town} />
+          </Link>
+        </div>
       </div>
-</div>
-      {/* The className "artworks-container" might be needed, ensure it's added if you use it for styling */}
       <div className="flex-card">
         <p>{formatDate(town.createdAt)}</p>
-        <div className="like">
+        {/* <div className="like">
           <FaHeart />
-        </div>
+        </div> */}
       </div>
 
       <div className="flex-card">
         <p className="artwork-author">{town.owner.data.attributes.username}</p>
+      </div>
+      <div className="flex-card">
+        <RenderActionButtons artworkId={town.id} loggedInUsername={loggedInUsername} ownerUsername={ownerUsername} />
       </div>
     </>
   );
@@ -70,4 +84,7 @@ export default function TownCard({ town }) {
 
 TownCard.propTypes = {
   town: PropTypes.object.isRequired,
+  artworkId: PropTypes.number.isRequired,
 };
+
+//TownCard.loader = loader;

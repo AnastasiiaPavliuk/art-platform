@@ -1,5 +1,7 @@
-const AUTH_DATA = "auth-data";
+const AUTH_DATA = "auth-data-town";
 
+
+//logs in user
 export const authenticate = async (username, password) => {
   let response;
   try {
@@ -54,21 +56,25 @@ export const register = async (username, password, email) => {
   return data;
 };
 
+//saves data
 export const setAuthData = (authData) => {
   if (authData) {
     localStorage.setItem(AUTH_DATA, JSON.stringify(authData));
   }
 };
 
+//for log out
 export const removeAuthData = () => {
   localStorage.removeItem(AUTH_DATA);
 };
 
+//check current user login state and user details
 export const getAuthData = () => {
   const authData = localStorage.getItem(AUTH_DATA);
   return authData ? JSON.parse(authData) : {};
 };
 
+//just some bsckend thingy 
 export const getToken = () => {
   const authData = getAuthData();
   return authData.jwt;

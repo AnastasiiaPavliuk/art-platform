@@ -1,6 +1,5 @@
 import {
   Form,
-  Link,
   redirect,
   useActionData,
   useLocation,
@@ -57,17 +56,17 @@ export default function LoginPage() {
   let actionData = useActionData();
 
   return (
-    <section>
-      <hgroup >
+    <section className="signin-section">
+      <hgroup className="signin-header">
         <h2>Sign in</h2>
-        {from != "/" ? (
+        {from !== "/" ? (
           <p>You must log in to view the page at {from}</p>
         ) : (
           <p>Get access to all the features</p>
         )}
       </hgroup>
-      <Form method="post">
-        <div >
+      <Form method="post" className="signin-form">
+        <div className="form-group">
           <input type="hidden" name="redirectTo" value={from} />
           <label htmlFor="email">Email</label>
           <input
@@ -80,7 +79,7 @@ export default function LoginPage() {
           />
           <ErrorField data={actionData} field="email" />
         </div>
-        <div >
+        <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -92,18 +91,11 @@ export default function LoginPage() {
           />
           <ErrorField data={actionData} field="password" />
         </div>
-        <div>
+        <div className="form-actions">
           <ErrorField data={actionData} field="general" />
-          <button
-            type="submit"
-            disabled={isLoggingIn}
-            // className={actionData && actionData.error ? style.shake : null}
-          >
-            {isLoggingIn ? "Logging in..." : "Login"}
+          <button type="submit" disabled={isLoggingIn}>
+            {isLoggingIn ? "Logging in..." : "Sign in"}
           </button>
-          <Link to="/auth/register">
-            ...or Sign up!
-          </Link>
         </div>
       </Form>
     </section>

@@ -1,6 +1,6 @@
 import { useLoaderData, } from "react-router-dom";
 import { getTown } from "../services/artwork";
-import Bar from "../components/Bar";
+import BarSaved from "../components/BarSaved";
 
 const loader = async ({ params }) => {
   const id = params.id;
@@ -27,9 +27,8 @@ export default function TownDetail() {
         style={{ borderColor: `hsl(${color}, 100%, 50%)` }}
       >
         {buildings.map((building) => (
-          <Bar
+          <BarSaved
             key={building.id}
-            barId_key={building.id}
             width={70}
             height={building.height}
             color={`hsl(${color}, 70%, 50%)`}

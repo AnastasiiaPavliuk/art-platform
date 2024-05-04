@@ -19,8 +19,6 @@ const Bar = ({ barId_key, width, height, color, windows, onDelete }) => {
 
   const toggleControllerVisibility = () => {
     setControllerVisible(prevState => !prevState);
-
-
   };
 
   let windowHeight;

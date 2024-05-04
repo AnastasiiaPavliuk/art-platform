@@ -4,8 +4,13 @@ import Bar from "./Bar";
 import ColorSlider from "./ColorSlider";
 import propTypes from "prop-types";
 
- export default function CreateTown ( {color, handleSliderChange, buildings, addBuilding, deleteBuilding}) {
-
+export default function EditTown({
+  color,
+  handleSliderChange,
+  buildings,
+  addBuilding,
+  deleteBuilding,
+}){
   return (
     <div className="app">
       <h1 className="heading">Generate your town!</h1>
@@ -44,11 +49,10 @@ import propTypes from "prop-types";
   );
 }
 
-CreateTown.propTypes = {
+EditTown.propTypes = {
   color: propTypes.number.isRequired,
   handleSliderChange: propTypes.func.isRequired,
   buildings: propTypes.array.isRequired,
   addBuilding: propTypes.func.isRequired,
   deleteBuilding: propTypes.func.isRequired,
 };
-

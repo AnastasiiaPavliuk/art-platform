@@ -9,11 +9,14 @@ import {
 } from "react-router-dom";
 
 import Index from "./routes";
+import TownDetail from "./routes/townDetail";
+
 import OverviewPage from "./routes/overviewPage";
+import EditTownPage from "./routes/editTownPage";
 import CreateTownPage from "./routes/createTownPage";
 import LoginPage from "./routes/auth/loginPage";
 import RegisterPage from "./routes/auth/registerPage";
-import TownDetail from "./routes/townDetail";
+
 import { removeAuthData } from "./services/auth";
 
 import "./styles/index.css";
@@ -43,6 +46,12 @@ const router = createBrowserRouter([
         element: <TownDetail />,
         path: "/artwork/:id",
         loader: TownDetail.loader,
+      },
+      {
+        path: "/artwork/:id/edit",
+        element: <EditTownPage />,
+        loader: EditTownPage.loader,
+        action: EditTownPage.action,
       },
       {
         element: <LoginPage />,
